@@ -1,2 +1,2 @@
-# nodejs_photos_graphql
+# Description
 Backend mini project photo app with GraphQL
