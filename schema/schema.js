@@ -4,9 +4,11 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+  scalar Date
   type Category {
     id: ID!
     name: String
+    registered_date: Date
   }
 
   type Photo {
@@ -16,6 +18,7 @@ const typeDefs = gql`
     desc: String
     is_public: Boolean
     category: Category
+    registered_date: Date
   }
 
   #############################################################################################

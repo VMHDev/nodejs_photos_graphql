@@ -24,3 +24,59 @@ Backend mini project photo app with GraphQL
   > https://www.npmjs.com/package/dotenv
 - jsonwebtoken: JSON Web Tokens -> Authentication
   > https://www.npmjs.com/package/jsonwebtoken
+
+# Example query:
+## Category
+```
+query MyQueryCategories {
+  categories {
+    id
+    name
+    registered_date
+  }
+}
+```
+```
+query MyQueryCategory {
+  category(id: "60a78b8c125814328850bf5a") {
+    id
+    name
+    registered_date
+  }
+}
+```
+## Photo
+```
+query MyQueryPhotos {
+  photos {
+    id
+    path
+    title
+    desc
+    is_public
+    registered_date
+    category {
+      id
+      name
+      registered_date
+    }
+  }
+}
+```
+```
+query MyQueryPhoto {
+  photo(id: "60ae03e75c8c8714bcf84942") {
+    id
+    path
+    title
+    desc
+    is_public
+    registered_date
+    category {
+      id
+      name
+      registered_date
+    }
+  }
+}
+```
