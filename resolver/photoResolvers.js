@@ -1,14 +1,8 @@
 /*
  ** 02 - File định nghĩa các truy vấn GraphQL
  */
-const resolvers = {
+const photoResolvers = {
   Query: {
-    categories: async (parent, args, context) => {
-      return await context.categoryMethod.getAllCategories();
-    },
-    category: async (parent, args, context) => {
-      return await context.categoryMethod.getCategoryById(args.id);
-    },
     photos: async (parent, args, context) => {
       return await context.photoMethod.getAllPhotos();
     },
@@ -23,4 +17,4 @@ const resolvers = {
   },
 };
 
-module.exports = resolvers;
+module.exports = photoResolvers;

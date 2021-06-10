@@ -1,15 +1,20 @@
 require('dotenv').config();
+var lodash = require('lodash');
 const express = require('express');
 const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
 
 // Load config connect database
 const connectDB = require('./config/db');
+
 // Load schema & resolvers
 const baseTypeDefs = require('./schema/baseTypeDefs');
 const categoryTypeDefs = require('./schema/categoryTypeDefs');
 const photoTypeDefs = require('./schema/photoTypeDefs');
-const resolvers = require('./resolver/resolver');
+
+const categoryResolvers = require('./resolver/categoryResolvers');
+const photoResolvers = require('./resolver/photoResolvers');
+
 // Load database methods
 const categoryMethod = require('./database/categoryMethod.js');
 const photoMethod = require('./database/photoMethod.js');
@@ -25,7 +30,7 @@ connectDB();
 // Init apollo server
 const server = new ApolloServer({
   typeDefs: [baseTypeDefs, categoryTypeDefs, photoTypeDefs],
-  resolvers,
+  resolvers: lodash.merge({}, categoryResolvers, photoResolvers),
   context: () => ({ categoryMethod, photoMethod }),
 });
 server.applyMiddleware({ app });
