@@ -8,6 +8,9 @@ const connectDB = require('./config/db');
 // Load schema & resolvers
 const typeDefs = require('./schema/schema');
 const resolvers = require('./resolver/resolver');
+// Load database methods
+const categoryMethod = require('./database/categoryMethod.js');
+const photoMethod = require('./database/photoMethod.js');
 
 // Start app
 const app = express();
@@ -21,6 +24,7 @@ connectDB();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: () => ({ categoryMethod, photoMethod }),
 });
 server.applyMiddleware({ app });
 
