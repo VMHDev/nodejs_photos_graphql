@@ -3,32 +3,19 @@
  */
 const { gql } = require('apollo-server-express');
 
-const typeDefs = gql`
-  scalar Date
+const categoryTypeDefs = gql`
   type Category {
     id: ID!
     name: String
     registered_date: Date
   }
 
-  type Photo {
-    id: ID!
-    path: String
-    title: String
-    desc: String
-    is_public: Boolean
-    category: Category
-    registered_date: Date
-  }
-
   #############################################################################################
   # ROOT TYPE
-  type Query {
+  extend type Query {
     categories: [Category]
     category(id: ID!): Category
-    photos: [Photo]
-    photo(id: ID): Photo
   }
 `;
 
-module.exports = typeDefs;
+module.exports = categoryTypeDefs;

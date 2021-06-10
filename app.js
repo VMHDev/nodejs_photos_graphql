@@ -6,7 +6,9 @@ const { ApolloServer } = require('apollo-server-express');
 // Load config connect database
 const connectDB = require('./config/db');
 // Load schema & resolvers
-const typeDefs = require('./schema/schema');
+const baseTypeDefs = require('./schema/baseTypeDefs');
+const categoryTypeDefs = require('./schema/categoryTypeDefs');
+const photoTypeDefs = require('./schema/photoTypeDefs');
 const resolvers = require('./resolver/resolver');
 // Load database methods
 const categoryMethod = require('./database/categoryMethod.js');
@@ -22,7 +24,7 @@ connectDB();
 
 // Init apollo server
 const server = new ApolloServer({
-  typeDefs,
+  typeDefs: [baseTypeDefs, categoryTypeDefs, photoTypeDefs],
   resolvers,
   context: () => ({ categoryMethod, photoMethod }),
 });
