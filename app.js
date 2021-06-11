@@ -36,7 +36,7 @@ const server = new ApolloServer({
 server.applyMiddleware({ app });
 
 // Run
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3013;
 app.listen(PORT, function () {
   console.log(
     `Server photos api is ready at: http://localhost:${PORT}${server.graphqlPath}`

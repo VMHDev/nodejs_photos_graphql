@@ -6,6 +6,7 @@ const { gql } = require('apollo-server-express');
 const baseTypeDefs = gql`
   scalar Date
   type Query
+  type Mutation
 `;
 
 module.exports = baseTypeDefs;

@@ -45,6 +45,24 @@ query MyQueryCategory {
   }
 }
 ```
+```
+mutation MyMutationCreateCategory{
+  createCategory(name: "Car"){
+    id
+    name
+    registered_date
+  }
+}
+```
+```
+mutation MyMutationUpdateCategory{
+  updateCategory(id:"60c2e7208e68db3b9ccdf6ff", name: "Car"){
+    id
+    name
+    registered_date
+  }
+}
+```
 ## Photo
 ```
 query MyQueryPhotos {

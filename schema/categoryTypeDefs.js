@@ -16,6 +16,11 @@ const categoryTypeDefs = gql`
     categories: [Category]
     category(id: ID!): Category
   }
+  extend type Mutation {
+    createCategory(name: String): Category
+    updateCategory(id: ID, name: String): Category
+    deleteCategory(id: ID): Category
+  }
 `;
 
 module.exports = categoryTypeDefs;
