@@ -12,6 +12,7 @@ const baseTypeDefs = require('./schema/baseTypeDefs');
 const categoryTypeDefs = require('./schema/categoryTypeDefs');
 const photoTypeDefs = require('./schema/photoTypeDefs');
 
+const baseResolvers = require('./resolver/baseResolvers');
 const categoryResolvers = require('./resolver/categoryResolvers');
 const photoResolvers = require('./resolver/photoResolvers');
 
@@ -30,7 +31,7 @@ connectDB();
 // Init apollo server
 const server = new ApolloServer({
   typeDefs: [baseTypeDefs, categoryTypeDefs, photoTypeDefs],
-  resolvers: lodash.merge({}, categoryResolvers, photoResolvers),
+  resolvers: lodash.merge({}, baseResolvers, categoryResolvers, photoResolvers),
   context: () => ({ categoryMethod, photoMethod }),
 });
 server.applyMiddleware({ app });

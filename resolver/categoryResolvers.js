@@ -1,7 +1,6 @@
 /*
  ** 02 - File định nghĩa các truy vấn GraphQL
  */
-const { ForbiddenError } = require('apollo-server');
 const categoryResolvers = {
   Query: {
     categories: async (parent, args, context) => {
@@ -16,14 +15,20 @@ const categoryResolvers = {
       return await context.categoryMethod.createCategory(args);
     },
     updateCategory: async (parent, args, context) => {
-      const res = await context.categoryMethod.updateCategory(args);
-      console.log('res', res);
-      return res;
+      const res = await context.categoryMethod.updateCategory(args.input);
+      return {
+        success: true,
+        errors: { field: null, messages: null },
+        data: res,
+      };
     },
     deleteCategory: async (parent, args, context) => {
       const res = await context.categoryMethod.deleteCategory(args);
-      console.log('res', res);
-      return res;
+      return {
+        success: true,
+        errors: { field: null, messages: null },
+        data: res,
+      };
     },
   },
 };
