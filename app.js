@@ -3,22 +3,26 @@ var lodash = require('lodash');
 const express = require('express');
 const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
+const { AuthenticationError } = require('apollo-server');
 
 // Load config connect database
 const connectDB = require('./config/db');
 
 // Load schema & resolvers
 const baseTypeDefs = require('./schema/baseTypeDefs');
+const authTypeDefs = require('./schema/authTypeDefs');
 const categoryTypeDefs = require('./schema/categoryTypeDefs');
 const photoTypeDefs = require('./schema/photoTypeDefs');
 
 const baseResolvers = require('./resolver/baseResolvers');
+const authResolvers = require('./resolver/authResolvers');
 const categoryResolvers = require('./resolver/categoryResolvers');
 const photoResolvers = require('./resolver/photoResolvers');
 
 // Load database methods
 const categoryMethod = require('./database/categoryMethod.js');
 const photoMethod = require('./database/photoMethod.js');
+const userMethod = require('./database/userMethod.js');
 
 // Start app
 const app = express();
@@ -30,9 +34,43 @@ connectDB();
 
 // Init apollo server
 const server = new ApolloServer({
-  typeDefs: [baseTypeDefs, categoryTypeDefs, photoTypeDefs],
-  resolvers: lodash.merge({}, baseResolvers, categoryResolvers, photoResolvers),
-  context: () => ({ categoryMethod, photoMethod }),
+  typeDefs: [baseTypeDefs, authTypeDefs, categoryTypeDefs, photoTypeDefs],
+  resolvers: lodash.merge(
+    {},
+    baseResolvers,
+    authResolvers,
+    categoryResolvers,
+    photoResolvers
+  ),
+  context: ({ req, res }) => {
+    return { req, res, userMethod, categoryMethod, photoMethod };
+  },
+  formatError: (err) => {
+    // Custom body respone when error
+    const message = err.message;
+    return { success: false, message };
+  },
+  formatResponse: (response, query) => {
+    /* VMH NOTE
+      // Get data res
+      const { context } = query;
+      const { req: request } = context; 
+      // Get data headers request
+      const { headers = {} } = request;
+    */
+
+    const { context } = query;
+    const { res } = context;
+    const { errors } = response;
+
+    // Custom status code when error
+    if (errors) {
+      const statusCode = parseInt(errors[0].extensions.code);
+      res.status(statusCode);
+    }
+
+    return response;
+  },
 });
 server.applyMiddleware({ app });
 

@@ -20,6 +20,7 @@
   "homepage": "https://github.com/VMHDev/nodejs_photos_graphql#readme",
   "dependencies": {
     "apollo-server": "^2.25.1",
+    "apollo-server-errors": "^2.5.0",
     "apollo-server-express": "^2.25.0",
     "argon2": "^0.28.1",
     "config": "^3.3.6",

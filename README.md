@@ -58,7 +58,6 @@ mutation MyMutationCreateCategory{
 mutation MyMutationUpdateCategory{
   updateCategory(id:"60c2e7208e68db3b9ccdf6ff", name: "Car"){
     success
-    errors
     data
   }
 }
@@ -67,7 +66,6 @@ mutation MyMutationUpdateCategory{
 mutation MyMutationDeleteCategory{
   deleteCategory(id:"60c3227f049bf131d80e9563"){
     success
-    errors
     data
   }
 }

@@ -18,7 +18,6 @@ const categoryResolvers = {
       const res = await context.categoryMethod.updateCategory(args.input);
       return {
         success: true,
-        errors: { field: null, messages: null },
         data: res,
       };
     },
@@ -26,7 +25,6 @@ const categoryResolvers = {
       const res = await context.categoryMethod.deleteCategory(args);
       return {
         success: true,
-        errors: { field: null, messages: null },
         data: res,
       };
     },

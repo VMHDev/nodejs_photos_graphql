@@ -3,20 +3,17 @@
  */
 const { gql } = require('apollo-server-express');
 
-const baseTypeDefs = gql`
-  scalar Date
-  scalar JSON
-  scalar JSONObject
-
-  type Respone {
-    success: Boolean
-    data: JSONObject
+const authTypeDefs = gql`
+  input LoginInput {
+    email: String!
+    password: String!
   }
 
   #############################################################################################
   # ROOT TYPE
-  type Query
-  type Mutation
+  extend type Mutation {
+    login(input: LoginInput): Respone
+  }
 `;
 
-module.exports = baseTypeDefs;
+module.exports = authTypeDefs;
