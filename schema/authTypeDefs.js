@@ -12,7 +12,7 @@ const authTypeDefs = gql`
   #############################################################################################
   # ROOT TYPE
   extend type Mutation {
-    login(input: LoginInput): Respone
+    login(input: LoginInput): ResponeObject
   }
 `;
 

@@ -2,7 +2,6 @@
  ** 01 - File định nghĩa cấu trúc của graph QL dựa trên cấu trúc database
  */
 const { gql } = require('apollo-server-express');
-const { GraphQLJSON, GraphQLJSONObject } = require('graphql-type-json');
 
 const categoryTypeDefs = gql`
   type Category {
@@ -19,13 +18,13 @@ const categoryTypeDefs = gql`
   #############################################################################################
   # ROOT TYPE
   extend type Query {
-    categories: [Category]
+    categories: ResponeJson
     category(id: ID!): Category
   }
   extend type Mutation {
     createCategory(name: String): Category
-    updateCategory(input: CategoryInput): Respone
-    deleteCategory(id: ID!): Respone
+    updateCategory(input: CategoryInput): ResponeObject
+    deleteCategory(id: ID!): ResponeObject
   }
 `;
 

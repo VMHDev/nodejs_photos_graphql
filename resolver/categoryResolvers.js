@@ -3,8 +3,20 @@
  */
 const categoryResolvers = {
   Query: {
+    // @query GET api/category
+    // @desc Get all category
+    // @access Public
     categories: async (parent, args, context) => {
-      return await context.categoryMethod.getAllCategories();
+      try {
+        const categories = await context.categoryMethod.getAllCategories();
+        return {
+          success: true,
+          data: categories,
+        };
+      } catch (error) {
+        console.log(error);
+        throw new ApolloError(MSG_INTERNAL_SERVER_ERROR, '500');
+      }
     },
     category: async (parent, args, context) => {
       return await context.categoryMethod.getCategoryById(args.id);

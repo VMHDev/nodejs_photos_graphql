@@ -65,7 +65,9 @@ const server = new ApolloServer({
 
     // Custom status code when error
     if (errors) {
-      const statusCode = parseInt(errors[0].extensions.code);
+      const statusCode = errors[0].extensions?.code
+        ? parseInt(errors[0].extensions?.code)
+        : 500;
       res.status(statusCode);
     }
 

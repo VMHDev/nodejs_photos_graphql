@@ -8,9 +8,14 @@ const baseTypeDefs = gql`
   scalar JSON
   scalar JSONObject
 
-  type Respone {
+  type ResponeObject {
     success: Boolean
     data: JSONObject
+  }
+
+  type ResponeJson {
+    success: Boolean
+    data: JSON
   }
 
   #############################################################################################
