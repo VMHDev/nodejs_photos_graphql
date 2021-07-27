@@ -18,13 +18,13 @@ const categoryTypeDefs = gql`
   #############################################################################################
   # ROOT TYPE
   extend type Query {
-    categories: ResponeJson
+    categories: ResponseJson
     category(id: ID!): Category
   }
   extend type Mutation {
     createCategory(name: String): Category
-    updateCategory(input: CategoryInput): ResponeObject
-    deleteCategory(id: ID!): ResponeObject
+    updateCategory(input: CategoryInput): ResponseObject
+    deleteCategory(id: ID!): ResponseObject
   }
 `;
 

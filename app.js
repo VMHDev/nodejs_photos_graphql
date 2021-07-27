@@ -48,7 +48,7 @@ const server = new ApolloServer({
   formatError: (err) => {
     // Custom body respone when error
     const message = err.message;
-    return { success: false, message };
+    return { success: false, code: err?.extensions?.code, message };
   },
   formatResponse: (response, query) => {
     /* VMH NOTE
@@ -62,12 +62,12 @@ const server = new ApolloServer({
     const { context } = query;
     const { res } = context;
     const { errors } = response;
+    console.log('errors', errors);
 
     // Custom status code when error
     if (errors) {
-      const statusCode = errors[0].extensions?.code
-        ? parseInt(errors[0].extensions?.code)
-        : 500;
+      const statusCode = errors[0].code ? parseInt(errors[0].code) : 500;
+      console.log('statusCode', statusCode);
       res.status(statusCode);
     }
 

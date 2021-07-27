@@ -74,7 +74,11 @@ const authResolvers = {
         };
       } catch (error) {
         console.log(error);
-        throw new ApolloError(MSG_INTERNAL_SERVER_ERROR, '500');
+        if (error) {
+          throw error;
+        } else {
+          throw new ApolloError(MSG_INTERNAL_SERVER_ERROR, '500');
+        }
       }
     },
   },
